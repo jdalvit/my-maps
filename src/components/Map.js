@@ -24,7 +24,7 @@ export const Map = compose(
     options={{ disableDefaultUI: withDefaultUi }}
   >
     {markerArray.map((marker) => (
-      <Marker position={marker} />
+      <Marker position={marker.position} markerWithLabel label={marker.label} />
     ))}
   </GoogleMap>
 ));
