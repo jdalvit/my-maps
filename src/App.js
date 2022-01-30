@@ -9,6 +9,7 @@ function App() {
   return (
     <div className="App">
       <Map
+        disableDefaultUI
         defaultCenter={{ lat: -34.397, lng: 150.644 }}
         // TODO: Change marker array to redux state once feature is merged
         markerArray={markerArray}

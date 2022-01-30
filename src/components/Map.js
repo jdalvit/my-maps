@@ -17,14 +17,19 @@ export const Map = compose(
   }),
   withScriptjs,
   withGoogleMap
-)(({ markerArray, withDefaultUi, defaultCenter }) => (
+)(({ markerArray, withDefaultUi, defaultCenter, disableDefaultUI }) => (
   <GoogleMap
     defaultZoom={8}
     defaultCenter={defaultCenter}
-    options={{ disableDefaultUI: withDefaultUi }}
+    options={{ disableDefaultUI }}
   >
-    {markerArray.map((marker) => (
-      <Marker position={marker.position} markerWithLabel label={marker.label} />
+    {markerArray.map((marker, i) => (
+      <Marker
+        position={marker.position}
+        markerWithLabel
+        label={marker.label}
+        key={i}
+      />
     ))}
   </GoogleMap>
 ));
