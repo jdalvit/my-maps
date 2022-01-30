@@ -33,6 +33,7 @@ export const LocationSearchbar = ({ className, handleSelect }) => {
           getOptionLabel={(option) => option.description}
           renderOption={(props, option) => (
             <Box
+              id={`locationOption.${option.description}`}
               {...props}
               {...getSuggestionItemProps(option)}
               component="li"

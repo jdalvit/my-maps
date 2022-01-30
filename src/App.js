@@ -1,21 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "./App.css";
 import { Map } from "./components/Map/Map";
 import { LocationSearchbar } from "./components/LocationSearchbar/LocationSearchbar";
 import { markerArraySelector } from "./state/mapSlice/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { onAddMarker } from "./state/mapSlice/events";
 
 function App() {
+  const dispatch = useDispatch();
   const markerArray = useSelector(markerArraySelector);
   return (
     <div className="App">
       <LocationSearchbar
         className={"LocationSearchbar"}
-        handleSelect={(address, coordinates) =>
-          alert(
-            `TODO: Handle select, address: ${address}, lat: ${coordinates.lat}, lng: ${coordinates.lng}`
-          )
-        }
+        handleSelect={(address, coordinates) => {
+          dispatch(onAddMarker(address, coordinates));
+        }}
       />
       <div className="MapContainer">
         <Map
