@@ -1,0 +1,14 @@
+@mixin shadow-box-4 {
+  box-shadow: 0 0 4px 2px rgba(150, 150, 150, 0.3);
+}
+
+@mixin elipsis-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin destyled-input {
+  border: none;
+  outline: none;
+}

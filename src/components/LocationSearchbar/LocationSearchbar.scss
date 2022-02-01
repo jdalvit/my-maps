@@ -1,0 +1,33 @@
+@import "../mixins.scss";
+
+.LocationSearchbar {
+  @include shadow-box-4;
+  border-radius: 4px;
+  background-color: white;
+  padding: 8px 20px;
+}
+
+.LocationSearchbarSearchInput {
+  @include destyled-input;
+  width: 100%;
+  font-size: medium;
+}
+
+.LocationSearchbarDropdownContainer {
+  &.NotEmpty {
+    padding-top: 8px;
+  }
+}
+
+.LocationSearchbarSuggestion {
+  @include elipsis-text;
+  font-size: smaller;
+  text-align: left;
+  padding: 4px;
+  border-top: 1px solid lightgray;
+  margin: 0;
+
+  &.ActiveSuggestion {
+    background-color: #fafafa;
+  }
+}
