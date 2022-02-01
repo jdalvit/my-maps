@@ -1,0 +1,15 @@
+.LocationSearchbar {
+  position: relative;
+  margin: auto;
+  top: 30px;
+  z-index: 1;
+  &.lg {
+    width: 25%;
+  }
+  &.md {
+    width: 40%;
+  }
+  &.sm {
+    width: 80%;
+  }
+}

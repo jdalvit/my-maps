@@ -3,10 +3,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import "./LocationSearchbar.css";
+import "./LocationSearchbar.scss";
 
 export const LocationSearchbar = ({ className, handleSelect }) => {
   const [address, setAdress] = useState("");
@@ -22,38 +19,42 @@ export const LocationSearchbar = ({ className, handleSelect }) => {
       value={address}
       onChange={setAdress}
       onSelect={wrappedHandleSelect}
+      highlightFirstSuggestion
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <Autocomplete
-          loading={loading}
-          className={`LocationSearchbar ${className}`}
-          sx={{ width: 300 }}
-          options={suggestions}
-          autoHighlight
-          getOptionLabel={(option) => option.description}
-          renderOption={(props, option) => (
-            <Box
-              id={`locationOption.${option.description}`}
-              {...props}
-              {...getSuggestionItemProps(option)}
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-            >
-              {option.description}
-            </Box>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...getInputProps()}
-              {...params}
-              label="Search places..."
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: "new-password", // disable autocomplete and autofill
-              }}
+        <>
+          <div className={`LocationSearchbar ${className}`}>
+            <input
+              {...getInputProps({
+                placeholder: "Search Places ...",
+                className: "LocationSearchbarSearchInput",
+              })}
             />
-          )}
-        />
+            <div className="LocationSearchbarDropdownContainer">
+              {loading && <div>Loading...</div>}
+              {suggestions.map((suggestion, i) => {
+                const suggestionClassName = suggestion.active
+                  ? "suggestion-item--active"
+                  : "suggestion-item";
+                // inline style for demonstration purpose
+                const style = suggestion.active
+                  ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                  : { backgroundColor: "#ffffff", cursor: "pointer" };
+                return (
+                  <div
+                    key={i}
+                    {...getSuggestionItemProps(suggestion, {
+                      className: `${suggestionClassName} LocationSearchbarSearchInput`,
+                      style,
+                    })}
+                  >
+                    <span>{suggestion.description}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
       )}
     </PlacesAutocomplete>
   );
