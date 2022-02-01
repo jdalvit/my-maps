@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import "./LocationSearchbar.scss";
+import { splitStringByMatch } from "./utils";
 
 export const LocationSearchbar = ({ className, handleSelect }) => {
   const [address, setAdress] = useState("");
@@ -21,35 +22,38 @@ export const LocationSearchbar = ({ className, handleSelect }) => {
       onSelect={wrappedHandleSelect}
       highlightFirstSuggestion
     >
-      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+      {({ getInputProps, suggestions, getSuggestionItemProps }) => (
         <>
           <div className={`LocationSearchbar ${className}`}>
             <input
               {...getInputProps({
-                placeholder: "Search Places ...",
+                placeholder: "Search places ...",
                 className: "LocationSearchbarSearchInput",
               })}
             />
-            <div className="LocationSearchbarDropdownContainer">
-              {loading && <div>Loading...</div>}
+            <div
+              className={`LocationSearchbarDropdownContainer ${
+                suggestions.length !== 0 ? "NotEmpty" : undefined
+              }`}
+            >
               {suggestions.map((suggestion, i) => {
-                const suggestionClassName = suggestion.active
-                  ? "suggestion-item--active"
-                  : "suggestion-item";
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                  : { backgroundColor: "#ffffff", cursor: "pointer" };
+                const splitDescription = splitStringByMatch(
+                  suggestion.description,
+                  address
+                );
                 return (
-                  <div
+                  <p
                     key={i}
                     {...getSuggestionItemProps(suggestion, {
-                      className: `${suggestionClassName} LocationSearchbarSearchInput`,
-                      style,
+                      className: `LocationSearchbarSuggestion ${
+                        suggestion.active ? "ActiveSuggestion" : undefined
+                      }`,
                     })}
                   >
-                    <span>{suggestion.description}</span>
-                  </div>
+                    {splitDescription.prefix}
+                    <b>{splitDescription.match}</b>
+                    {splitDescription.suffix}
+                  </p>
                 );
               })}
             </div>
