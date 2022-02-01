@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useLoadScript, GoogleMap, Marker } from "@react-google-maps/api";
+import { useLoadScript, GoogleMap } from "@react-google-maps/api";
 import { LocationSearchbar } from "../LocationSearchbar/LocationSearchbar";
 import "./Map.scss";
 import { useScreenSizeClassname } from "../utils";
+import { MapMarker } from "./MapMarker/MapMarker";
 
 const libraries = ["places"];
 
@@ -25,8 +26,6 @@ export const Map = ({ markerArray, className, onAddMarker, initialCenter }) => {
     setCenter(coordinates);
   };
 
-  console.log(screenSizeClassname);
-
   const renderMap = () => {
     return (
       <GoogleMap
@@ -37,11 +36,7 @@ export const Map = ({ markerArray, className, onAddMarker, initialCenter }) => {
         mapContainerStyle={mapContainerStyle}
       >
         {markerArray.map((marker, i) => (
-          <Marker
-            key={`marker.${i}`}
-            position={marker.position}
-            label={marker.label}
-          />
+          <MapMarker marker={marker} />
         ))}
         <LocationSearchbar
           className={`LocationSearchbar ${screenSizeClassname}`}
