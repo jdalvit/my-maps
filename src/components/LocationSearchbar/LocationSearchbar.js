@@ -43,7 +43,7 @@ export const LocationSearchbar = ({ className, handleSelect }) => {
                 );
                 return (
                   <p
-                    key={i}
+                    key={`suggestion.${i}`}
                     {...getSuggestionItemProps(suggestion, {
                       className: `LocationSearchbarSuggestion ${
                         suggestion.active ? "ActiveSuggestion" : undefined

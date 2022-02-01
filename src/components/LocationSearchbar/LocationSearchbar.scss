@@ -21,7 +21,7 @@
 
 .LocationSearchbarSuggestion {
   @include elipsis-text;
-  font-size: smaller;
+  font-size: small;
   text-align: left;
   padding: 4px;
   border-top: 1px solid lightgray;

@@ -8,6 +8,19 @@
   text-overflow: ellipsis;
 }
 
+@mixin multiline-elipsis-text($max-lines: 1) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @supports (-webkit-line-clamp: $max-lines) {
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: $max-lines;
+    -webkit-box-orient: vertical;
+  }
+}
+
 @mixin destyled-input {
   border: none;
   outline: none;

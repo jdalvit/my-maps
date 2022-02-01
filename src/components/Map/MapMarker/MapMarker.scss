@@ -1,0 +1,29 @@
+@import "../../mixins.scss";
+
+.MapMarkerLabelContainer {
+  display: flex;
+  margin-left: 16px;
+  flex-flow: column nowrap;
+  max-width: 150px;
+  min-height: 44px;
+
+  .MapMarkerLabel {
+    color: #ea4335;
+    // TODO: check stroke
+    -webkit-text-stroke-color: lightgray;
+    -webkit-text-stroke-width: 0.5px;
+    text-align: left;
+
+    &.MainLabel {
+      @include elipsis-text;
+      font-weight: 700;
+      font-size: 1.2em;
+    }
+
+    &.SecondaryLabel {
+      @include multiline-elipsis-text(2);
+      font-weight: 600;
+      font-size: 1em;
+    }
+  }
+}
