@@ -4,6 +4,7 @@ import { LocationSearchbar } from "../LocationSearchbar/LocationSearchbar";
 import "./Map.scss";
 import { useScreenSizeClassname } from "../utils";
 import { MapMarker } from "./MapMarker/MapMarker";
+import { mapsApiKey } from "../../constants";
 
 const libraries = ["places"];
 
@@ -16,8 +17,7 @@ export const Map = ({ markerArray, className, onAddMarker, initialCenter }) => {
   const [center, setCenter] = useState(initialCenter);
   const screenSizeClassname = useScreenSizeClassname();
   const { isLoaded } = useLoadScript({
-    // TODO: Extract api key to .Env file
-    googleMapsApiKey: "AIzaSyD5pVs8CyH-AMdlzdxNSznUCQzTpFf90wY",
+    googleMapsApiKey: mapsApiKey,
     libraries,
   });
 
