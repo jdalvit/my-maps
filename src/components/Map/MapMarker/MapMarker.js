@@ -24,8 +24,7 @@ export const MapMarker = ({ marker }) => {
             {splitedLabel.mainLabel}
           </span>
           <span className="MapMarkerLabel SecondaryLabel">
-            {splitedLabel.secondaryLabel} asdfasd adsfasd asdf asdf
-            aasdfasdfsaasdfa adsfafasdfasdfasdfasd
+            {splitedLabel.secondaryLabel}
           </span>
         </div>
       </InfoBox>
